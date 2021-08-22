@@ -3,13 +3,7 @@
 <suite name="Login Suite">
     <test name = "Login Test">
         <classes>
-            <class name="ui.tests.LoginTest">
-                <methods>
-                    <include name="correctLogin"/>
-                    <include name="incorrectLogin"/>
-                    <include name="lockedLogin"/>
-                </methods>
-            </class>
+            <class name="ui.tests.LoginTest"> </class>
         </classes>
     </test>
 </suite>

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
     private static final int TIMEOUT = 20;
-    private static final int POLLING = 30;
+    private static final int POLLING = 100;
 
     protected WebDriver driver;
     private WebDriverWait wait;
@@ -25,8 +25,9 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    protected void waitForElementToBeClickable(WebElement element) {
+    protected boolean waitForElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+        return true;
     }
 
     protected void waitForElementToPresence(By locator) {
@@ -39,5 +40,13 @@ public class BasePage {
 
     protected void waitForTextToDisappear(By locator, String text) {
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(locator, text)));
+    }
+
+    protected void waitForTextHasContent(By locator, String text) {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+    }
+
+    protected void waitForTextHasNotContent(By locator, String text) {
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(locator, text)));
     }
 }

@@ -15,10 +15,14 @@ public class LoginPage extends BasePage {
     }
 
     private Assertion assertion = new Assertion();
+    private Actions actions = new Actions(driver);
+
+    private String currentUrl;
+    private String mainPagePath = "inventory";
     private String incorrectLoginMassage = "Epic sadface: Username and password do not match any user in this service";
     private String lockedLoginMassage = "Epic sadface: Sorry, this user has been locked out.";
-    private String massage;
-    private Actions actions = new Actions(driver);
+
+    private By errorLoginMassage = By.className("error-message-container");
 
     @FindBy(id = "user-name")
     private WebElement username;
@@ -32,9 +36,15 @@ public class LoginPage extends BasePage {
     @FindBy(className = "error-message-container")
     private WebElement errorMassage;
 
+    @FindBy(id = "react-burger-menu-btn")
+    private WebElement leftSideMenu;
+
+    @FindBy(id = "logout_sidebar_link")
+    private WebElement logOutButton;
+
 
     @Step("Log in step with username {0}, password {1}")
-    public MainPage login(String user, String pass) {
+    public LoginPage login(String user, String pass) {
         waitForElementToBeClickable(username);
         actions.doubleClick(username).build().perform();
         username.sendKeys(user);
@@ -43,20 +53,29 @@ public class LoginPage extends BasePage {
         password.sendKeys(pass);
         waitForElementToBeClickable(loginButton);
         loginButton.click();
-        return new MainPage(driver);
-    }
-
-    public LoginPage assertionForIncorrectLogin() {
-        waitForElementToAppear((By)errorMassage);
-        massage = errorMassage.getText();
-        assertion.assertEquals(massage, incorrectLoginMassage);
+        currentUrl = driver.getCurrentUrl();
+        currentUrl.contains(mainPagePath);
         return new LoginPage(driver);
     }
 
-    public LoginPage assertionForLockedLogin() {
-        waitForElementToAppear((By)errorMassage);
-        massage = errorMassage.getText();
-        assertion.assertEquals(massage, incorrectLoginMassage);
+    @Step("Log out step")
+    public LoginPage logOut() {
+        waitForElementToBeClickable(leftSideMenu);
+        leftSideMenu.click();
+        waitForElementToBeClickable(logOutButton);
+        logOutButton.click();
         return new LoginPage(driver);
+    }
+
+    @Step("Assertion For Incorrect Log In")
+    public void assertionForIncorrectLogin() {
+        waitForElementToAppear(errorLoginMassage);
+        assertion.assertEquals(driver.findElement(errorLoginMassage).getText(), incorrectLoginMassage);
+    }
+
+    @Step("Assertion For Locked Log In")
+    public void assertionForLockedLogin() {
+        waitForElementToAppear(errorLoginMassage);
+        assertion.assertEquals(driver.findElement(errorLoginMassage).getText(), lockedLoginMassage);
     }
 }

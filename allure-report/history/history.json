@@ -1,0 +1,41 @@
+{
+  "85411601aa0a1c2fae6668a220c72788" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "e56df77149740058",
+      "status" : "passed",
+      "time" : {
+        "start" : 1629660083581,
+        "stop" : 1629660085108,
+        "duration" : 1527
+      }
+    } ]
+  },
+  "fb5c0d5151b8cd01a4fa61f768205af8" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "5c5034bd2a592941",
+      "status" : "broken",
+      "statusDetails" : "Expected condition failed: waiting for condition to not be valid: element to be clickable: [[ChromeDriver: chrome on WINDOWS (600a75a8344bad7efbc88acebf45a602)] -> id: checkout] (tried for 20 second(s) with 100 milliseconds interval)\nBuild info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'\nSystem info: host: 'DESKTOP-VMPD4I0', ip: '192.168.137.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.11'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 92.0.4515.159, chrome: {chromedriverVersion: 92.0.4515.43 (8c61b7e2989f2..., userDataDir: C:\\Users\\HP250C~1\\AppData\\L...}, goog:chromeOptions: {debuggerAddress: localhost:63369}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}\nSession ID: 600a75a8344bad7efbc88acebf45a602",
+      "time" : {
+        "start" : 1629660062251,
+        "stop" : 1629660082552,
+        "duration" : 20301
+      }
+    } ]
+  }
+}
