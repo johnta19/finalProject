@@ -30,12 +30,12 @@ public class ListenersTest extends BaseTest implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
+        System.out.println("I an onTestStart method " + getTestMethodName(iTestResult) + " start");
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-
+        System.out.println("I an onTestSuccess method " + getTestMethodName(iTestResult) + " success");
     }
 
     @Override
@@ -54,39 +54,22 @@ public class ListenersTest extends BaseTest implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        System.out.println("I'm on TestFailure method " + getTestMethodName(iTestResult) + " failed");
-
-        Object testClass = iTestResult.getInstance();
-        WebDriver driver = ((BaseTest) testClass).getDriver();
-
-        if (driver instanceof WebDriver) {
-            System.out.println("Screenshot captured for test case: " + getTestMethodName(iTestResult));
-            saveScreenshotPNG(driver);
-        }
-        saveTextLog(getTestMethodName(iTestResult) + " failed and screenshot taken");
+        System.out.println("I an onTestSkipped method " + getTestMethodName(iTestResult) + " skipped");
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        System.out.println("I'm on TestFailure method " + getTestMethodName(iTestResult) + " failed");
-
-        Object testClass = iTestResult.getInstance();
-        WebDriver driver = ((BaseTest) testClass).getDriver();
-
-        if (driver instanceof WebDriver) {
-            System.out.println("Screenshot captured for test case: " + getTestMethodName(iTestResult));
-            saveScreenshotPNG(driver);
-        }
-        saveTextLog(getTestMethodName(iTestResult) + " failed and screenshot taken");
+        System.out.println("Test failed but it is in defined success ratio " + getTestMethodName(iTestResult) + " Failed But With in Success Percentage");
     }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-
+        System.out.println("I am at onStart method " + iTestContext.getName());
+        iTestContext.setAttribute("WebDriver", BaseTest.getDriver());
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-
+        System.out.println("I am at onFinish method " + iTestContext.getName());
     }
 }
