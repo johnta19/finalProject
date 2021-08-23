@@ -1,6 +1,8 @@
 package properties;
 
 import base.test.BaseTest;
+import ui.tests.LoginTest;
+import ui.tests.OrderTest;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -23,13 +25,13 @@ public class ConfigProperties {
             String lastname = prop.getProperty("lastname");
             String postalCode = prop.getProperty("postalCode");
             BaseTest.browserName = browser;
-            BaseTest.correctUser = correctUser;
-            BaseTest.lockedUser = lockedUser;
-            BaseTest.incorrectUser = incorrectUser;
-            BaseTest.password = password;
-            BaseTest.firstname = firstname;
-            BaseTest.lastname = lastname;
-            BaseTest.postalCode = postalCode;
+            LoginTest.correctUser = correctUser;
+            LoginTest.lockedUser = lockedUser;
+            LoginTest.incorrectUser = incorrectUser;
+            LoginTest.password = password;
+            OrderTest.firstname = firstname;
+            OrderTest.lastname = lastname;
+            OrderTest.postalCode = postalCode;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println(e.getCause());

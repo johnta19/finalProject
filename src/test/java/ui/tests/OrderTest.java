@@ -2,16 +2,19 @@ package ui.tests;
 
 import base.test.BaseTest;
 import io.qameta.allure.Description;
-import listeners.ListenersTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static steps.BayerSteps.*;
+import static ui.tests.CartTest.sauceLabsBackpack;
+import static ui.tests.LoginTest.correctUser;
+import static ui.tests.LoginTest.password;
 
-@Listeners({ListenersTest.class})
 public class OrderTest extends BaseTest {
+    public static String firstname;
+    public static String lastname;
+    public static String postalCode;
 
     @BeforeMethod
     public void logIn() {
@@ -27,13 +30,13 @@ public class OrderTest extends BaseTest {
     @Test
     public void endToEndBuy() {
         chooseItemSauceLabsBackpack()
-                .checkItemAtProductPage(nameSauceLabsBackpack, priceSauceLabsBackpack)
+                .checkItemAtProductPage(sauceLabsBackpack.getName(), sauceLabsBackpack.getPrice())
                 .clickAddToCartButton()
                 .clickCartButton()
-                .checkItemAtCart(nameSauceLabsBackpack, priceSauceLabsBackpack, quantity)
+                .checkItemAtCart(sauceLabsBackpack.getName(), sauceLabsBackpack.getPrice(), sauceLabsBackpack.getQuantity())
                 .clickCheckoutButton()
                 .fillCheckoutForm(firstname, lastname, postalCode)
-                .checkItemAtOrder(nameSauceLabsBackpack, priceSauceLabsBackpack, quantity)
+                .checkItemAtOrder(sauceLabsBackpack.getName(), sauceLabsBackpack.getPrice(), sauceLabsBackpack.getQuantity())
                 .clickFinishButton()
                 .checkOrderResult()
                 .clickBackToProductsButton();

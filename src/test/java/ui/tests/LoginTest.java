@@ -7,6 +7,10 @@ import org.testng.annotations.Test;
 import static steps.BayerSteps.*;
 
 public class LoginTest extends BaseTest {
+    public static String correctUser;
+    public static String lockedUser;
+    public static String incorrectUser;
+    public static String password;
 
     @Description("Standard user should be able to login")
     @Test

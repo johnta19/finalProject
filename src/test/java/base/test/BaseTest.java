@@ -1,15 +1,13 @@
 package base.test;
 
-import browser.provider.BrowserProvider;
+import DAO.Item;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.opera.OperaDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
+import steps.BayerSteps;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,17 +17,6 @@ public class BaseTest  {
     private static WebDriver driver;
     private WebStorage webStorage;
     public static String browserName;
-    public static String correctUser;
-    public static String lockedUser;
-    public static String incorrectUser;
-    public static String password;
-    public static String firstname;
-    public static String lastname;
-    public static String postalCode;
-    public String nameSauceLabsBackpack = "Sauce Labs Backpack";
-    public String priceSauceLabsBackpack = "$29.99";
-    public String quantity = "1";
-    private BrowserProvider browserProvider;
     private static final String URL = "https://www.saucedemo.com";
     private static final int TIMEOUT = 10;
 
@@ -50,6 +37,7 @@ public class BaseTest  {
         }
 
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+        BayerSteps.init();
     }
 
     @BeforeTest
@@ -64,8 +52,9 @@ public class BaseTest  {
         webStorage.getLocalStorage().clear();
     }
 
-    @AfterTest
-    public void afterTest() {
+
+    @AfterSuite
+    public void afterSuite() {
         driver.quit();
     }
 

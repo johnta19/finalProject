@@ -4,16 +4,22 @@ import base.test.BaseTest;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.MainPage;
-import pages.ProductPage;
 
-public class BayerSteps extends BaseTest {
-    private static LoginPage loginPage = new LoginPage(getDriver());
-    private static MainPage mainPage = new MainPage(getDriver());
-    private static CartPage cartPage = new CartPage(getDriver());
+import static base.test.BaseTest.getDriver;
+
+public class BayerSteps {
+    private static LoginPage loginPage;
+    private static MainPage mainPage;
 
     public static LoginPage correctLogIn(String user, String pass) {
         return loginPage.login(user, pass);
     }
+
+    public static void init(){
+        loginPage = new LoginPage(getDriver());
+        mainPage = new MainPage(getDriver());
+    }
+
 
     public static LoginPage correctLogOut() {
         return loginPage.logOut();
