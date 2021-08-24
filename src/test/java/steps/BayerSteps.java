@@ -1,9 +1,8 @@
 package steps;
 
-import base.test.BaseTest;
-import pages.CartPage;
-import pages.LoginPage;
-import pages.MainPage;
+import ui.pages.CartPage;
+import ui.pages.LoginPage;
+import ui.pages.MainPage;
 
 import static base.test.BaseTest.getDriver;
 

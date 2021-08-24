@@ -1,16 +1,19 @@
 package ui.tests;
 
-import DAO.Item;
+import ui.DAO.Item;
 import base.test.BaseTest;
 import io.qameta.allure.Description;
+import listeners.ListenersTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static steps.BayerSteps.*;
 import static ui.tests.LoginTest.correctUser;
 import static ui.tests.LoginTest.password;
 
+@Listeners(ListenersTest.class)
 public class CartTest extends BaseTest {
     public static Item sauceLabsBackpack = Item.builder()
             .name("Sauce Labs Backpack").price("$29.99").quantity("1").build();
