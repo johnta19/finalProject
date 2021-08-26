@@ -1,5 +1,6 @@
 package ui.pages;
 
+import io.qameta.allure.Step;
 import ui.base.page.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +13,6 @@ public class CartPage extends BasePage {
     public CartPage(WebDriver driver) {
         super(driver);
     }
-
-    private Assertion assertion = new Assertion();
 
     private String currentUrl;
     private String checkoutStepOnePath = "checkout-step-one";
@@ -35,22 +34,26 @@ public class CartPage extends BasePage {
         return By.xpath("//*[text()=\"" + name +"\"]//ancestor::div[@class='cart_item']//div[@class='inventory_item_price' and contains(., \"" + price + "\")]//ancestor::div[@class='cart_item']//div[@class = 'cart_quantity' and text() = \"" + quantity + "\"]");
     }
 
+    @Step("Check item {0}, price {1}, quantity {2} at cart")
     public CartPage checkItemAtCart(String name, String price, String quantity){
         waitForElementToPresence(namePriceQuantityXpath(name, price, quantity));
         return new CartPage(driver);
     }
 
+    @Step("Check remove item {0} from cart")
     public CartPage checkRemoveItemFromCart(String name) {
         waitForTextHasNotContent(itemNameAtCart, name);
         return new CartPage(driver);
     }
 
+    @Step("Click remove button")
     public CartPage clickRemoveButton() {
         waitForElementToBeClickable(removeButton);
         removeButton.click();
         return new CartPage(driver);
     }
 
+    @Step("Click checkout button")
     public CheckoutStepOnePage clickCheckoutButton() {
         currentUrl = driver.getCurrentUrl();
         currentUrl.contains(checkoutStepOnePath);
@@ -59,6 +62,7 @@ public class CartPage extends BasePage {
         return new CheckoutStepOnePage(driver);
     }
 
+    @Step("Click continue shopping button")
     public void clickContinueShoppingButton() {
         waitForElementToBeClickable(continueShoppingButton);
         continueShoppingButton.click();
@@ -66,11 +70,9 @@ public class CartPage extends BasePage {
         currentUrl.contains(mainPagePath);
     }
 
+    @Step("Check checkout button is not clickable")
     public void checkoutButtonNotClickable() {
-        if(waitForElementToBeClickable(checkoutButton)) {
-            assertion.fail("checkoutButton is clickable");
-        }
-
+        waitForElementNotToBeClickable(checkoutButton);
     }
 }
 

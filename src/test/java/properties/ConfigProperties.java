@@ -1,6 +1,7 @@
 package properties;
 
 import base.test.BaseTest;
+import browser.provider.BrowserProvider;
 import ui.tests.LoginTest;
 import ui.tests.OrderTest;
 
@@ -24,7 +25,7 @@ public class ConfigProperties {
             String firstname = prop.getProperty("firstname");
             String lastname = prop.getProperty("lastname");
             String postalCode = prop.getProperty("postalCode");
-            BaseTest.browserName = browser;
+            BrowserProvider.browserName = browser;
             LoginTest.correctUser = correctUser;
             LoginTest.lockedUser = lockedUser;
             LoginTest.incorrectUser = incorrectUser;

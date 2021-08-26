@@ -43,7 +43,7 @@ public class LoginPage extends BasePage {
     private WebElement logOutButton;
 
 
-    @Step("Log in step with username {0}, password {1}")
+    @Step("Log in  with username {0}, password {1}")
     public LoginPage login(String user, String pass) {
         waitForElementToBeClickable(username);
         actions.doubleClick(username).build().perform();
@@ -58,7 +58,7 @@ public class LoginPage extends BasePage {
         return new LoginPage(driver);
     }
 
-    @Step("Log out step")
+    @Step("Log out")
     public LoginPage logOut() {
         waitForElementToBeClickable(leftSideMenu);
         leftSideMenu.click();
@@ -67,13 +67,13 @@ public class LoginPage extends BasePage {
         return new LoginPage(driver);
     }
 
-    @Step("Assertion For Incorrect Log In")
+    @Step("Check error massage for incorrect log in")
     public void assertionForIncorrectLogin() {
         waitForElementToAppear(errorLoginMassage);
         assertion.assertEquals(driver.findElement(errorLoginMassage).getText(), incorrectLoginMassage);
     }
 
-    @Step("Assertion For Locked Log In")
+    @Step("Check error massage for locked log in")
     public void assertionForLockedLogin() {
         waitForElementToAppear(errorLoginMassage);
         assertion.assertEquals(driver.findElement(errorLoginMassage).getText(), lockedLoginMassage);

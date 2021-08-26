@@ -13,8 +13,6 @@ public class MainPage extends BasePage {
         super(driver);
     }
 
-    private Assertion assertion = new Assertion();
-
     private String currentUrl;
     private String productPagePath = "inventory-item";
     private String cartPath = "cart";
@@ -47,29 +45,34 @@ public class MainPage extends BasePage {
         return By.xpath("//*[text()=\"" + name + "\"]//ancestor::div[@class='inventory_details_container']//div[@class='inventory_details_price' and contains(., \"" + price + "\")]");
     }
 
+    @Step("Check item {0}, price {1} at product page")
     public ProductPage checkItemAtProductPage(String name, String price) {
         waitForElementToPresence(namePriceXpath(name, price));
         return new ProductPage(driver);
     }
 
+    @Step("Add to cart Sauce Labs Backpack ")
     public MainPage addToCartSauceLabsBackpack() {
         waitForElementToBeClickable(addToCartSauceLabsBackpackButton);
         addToCartSauceLabsBackpackButton.click();
         return new MainPage(driver);
     }
 
+    @Step("Add to cart Sauce Labs Bolt T Shirt")
     public MainPage addToCartItemSauceLabsBoltTShirt() {
         waitForElementToBeClickable(addToCartSauceLabsBoltTShirtButton);
         addToCartSauceLabsBoltTShirtButton.click();
         return new MainPage(driver);
     }
 
+    @Step("Add to cart Sauce Labs Onesie ")
     public MainPage addToCartItemSauceLabsOnesie() {
         waitForElementToBeClickable(addToCartaSauceLabsOnesieButton);
         addToCartaSauceLabsOnesieButton.click();
         return new MainPage(driver);
     }
 
+    @Step("Click cart button")
     public CartPage clickCartButton() {
         currentUrl = driver.getCurrentUrl();
         currentUrl.contains(cartPath);

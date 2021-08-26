@@ -1,5 +1,6 @@
 package ui.pages;
 
+import io.qameta.allure.Step;
 import ui.base.page.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +14,7 @@ public class ProductPage extends BasePage {
     @FindBy(id = "add-to-cart-sauce-labs-backpack")
     private WebElement addToCartButton;
 
+    @Step("Click add to cart button")
     public MainPage clickAddToCartButton() {
         waitForElementToBeClickable(addToCartButton);
         addToCartButton.click();

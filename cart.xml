@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Add item to cart, remove item from cart" parallel="false">
-    <test name="Add item to cart, remove item from cart" parallel="false">
+<suite name="Cart Suite" parallel="false">
+    <test name="Cart test" parallel="false">
         <classes>
             <class name="ui.tests.CartTest"> </class>
         </classes>

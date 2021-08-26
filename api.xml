@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="CRUD Booking">
-    <test name="CRUD Booking">
+<suite name="CRUD Booking suite">
+    <test name="CRUD Booking test">
         <classes>
             <class name="api.tests.RestAssuredRequests"/>
         </classes>

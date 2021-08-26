@@ -30,17 +30,17 @@ public class ListenersTest extends BaseTest implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        System.out.println("I am in onTestStart method " + getTestMethodName(iTestResult) + " start");
+        System.out.println(getTestMethodName(iTestResult) + " start");
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        System.out.println("I am in onTestSuccess method " + getTestMethodName(iTestResult) + " success");
+        System.out.println(getTestMethodName(iTestResult) + " success");
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        System.out.println("I'm on TestFailure method " + getTestMethodName(iTestResult) + " failed");
+        System.out.println(getTestMethodName(iTestResult) + " failed");
 
         Object testClass = iTestResult.getInstance();
         WebDriver driver = ((BaseTest) testClass).getDriver();
@@ -54,7 +54,7 @@ public class ListenersTest extends BaseTest implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        System.out.println("I am in onTestSkipped method " + getTestMethodName(iTestResult) + " skipped");
+        System.out.println(getTestMethodName(iTestResult) + " skipped");
     }
 
     @Override
@@ -64,12 +64,12 @@ public class ListenersTest extends BaseTest implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        System.out.println("I am in onStart method " + iTestContext.getName());
+        System.out.println(iTestContext.getName() + " started");
         iTestContext.setAttribute("WebDriver", BaseTest.getDriver());
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        System.out.println("I am in onFinish method " + iTestContext.getName());
+        System.out.println(iTestContext.getName() + " finished");
     }
 }

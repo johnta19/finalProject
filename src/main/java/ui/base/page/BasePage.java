@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
-    private static final int TIMEOUT = 20;
+    private static final int TIMEOUT = 15;
     private static final int POLLING = 100;
 
     protected WebDriver driver;
@@ -28,6 +28,10 @@ public class BasePage {
     protected boolean waitForElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         return true;
+    }
+
+    protected void waitForElementNotToBeClickable(WebElement element) {
+        wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(element)));
     }
 
     protected void waitForElementToPresence(By locator) {

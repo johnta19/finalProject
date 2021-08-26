@@ -1,40 +1,27 @@
 package base.test;
 
+import browser.provider.BrowserProvider;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.html5.WebStorage;
-import org.openqa.selenium.opera.OperaDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import steps.BayerSteps;
 
 import java.util.concurrent.TimeUnit;
 
-import static properties.ConfigProperties.getProperties;
-
 public class BaseTest  {
-    private static WebDriver driver;
+    public static WebDriver driver;
     private WebStorage webStorage;
-    public static String browserName;
     private static final String URL = "https://www.saucedemo.com";
     private static final int TIMEOUT = 10;
+    private BrowserProvider browserProvider;
 
     @BeforeSuite
-    public void beforeSuite() {
-        getProperties();
-        if(browserName.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-            driver = new ChromeDriver();
-        }
-        else if(browserName.equalsIgnoreCase("opera")) {
-            System.setProperty("webdriver.opera.driver", "operadriver.exe");
-            driver = new OperaDriver();
-        }
-        else if(browserName.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
-            driver = new FirefoxDriver();
-        }
-
+    public void initDriver() {
+        browserProvider = new BrowserProvider();
+        browserProvider.getBrowser();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         BayerSteps.init();
     }
@@ -53,7 +40,7 @@ public class BaseTest  {
 
 
     @AfterSuite
-    public void afterSuite() {
+    public void quiteDriver() {
         driver.quit();
     }
 

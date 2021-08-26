@@ -1,8 +1,13 @@
 package api.tests;
 
-import api.data.provider.Builder;
 import api.data.provider.DataProvider;
+import api.pojo.Bookingdates;
+import api.pojo.CreateBookingPojo;
+import api.pojo.CreateTokenPojo;
+import api.pojo.PartialUpdateBookingPojo;
 import base.test.BaseTestApi;
+import com.github.javafaker.Faker;
+import io.qameta.allure.Description;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -10,6 +15,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import static api.constants.Credentials.LOGIN;
+import static api.constants.Credentials.PASSWORD;
 import static api.constants.Endpoints.PATH_TO_BOOKING;
 import static api.constants.Endpoints.POST_REQUEST;
 import static api.specifications.ResponseSpec.responseSpec;
@@ -21,26 +28,53 @@ import static org.hamcrest.Matchers.equalTo;
 public class RestAssuredRequests extends BaseTestApi {
 
     private DataProvider dataProvider = new DataProvider();
-    private Builder builder = new Builder();
+    private Faker faker = new Faker();
+    private String firstname = faker.name().firstName();
+    private String updatedFirstname = faker.name().firstName();
+    private String updatedLastname = faker.name().lastName();
+    private String lastname = faker.name().lastName();
+    private String additionalNeeds = faker.commerce().productName();
+    private int totalPrice = faker.number().randomDigit();
+    private String chekIn = "2018-01-01";
+    private String chekOut = "2019-01-01";
 
-
+    @Description("User should be able to log in")
     @BeforeTest
     public void createToken() {
+        CreateTokenPojo createToken =  CreateTokenPojo.builder()
+                .username(LOGIN)
+                .password(PASSWORD)
+                .build();
+
         Response response = given()
-                .body(builder.createToken())
+                .body(createToken)
                 .when()
                 .post(POST_REQUEST)
                 .then()
                 .spec(responseSpec)
                 .extract().response();
         dataProvider.setToken(response.jsonPath().getString("token"));
-        RestAssured.filters(new AllureRestAssured());
     }
 
+    @Description("User should be able to create booking")
     @Test
     public void createBooking() {
+        Bookingdates bookingdates = Bookingdates.builder()
+                .checkin(chekIn)
+                .checkout(chekOut)
+                .build();
+
+        CreateBookingPojo createBooking = CreateBookingPojo.builder()
+                .firstname(firstname)
+                .lastname(lastname)
+                .totalprice(totalPrice)
+                .depositpaid(true)
+                .bookingdates(bookingdates)
+                .additionalneeds(additionalNeeds)
+                .build();
+
         Response response = given()
-                .body(builder.createBooking())
+                .body(createBooking)
                 .when()
                 .post(PATH_TO_BOOKING)
                 .then()
@@ -49,6 +83,7 @@ public class RestAssuredRequests extends BaseTestApi {
         dataProvider.setId(response.jsonPath().getInt("bookingid"));
     }
 
+    @Description("User should be able to get booking")
     @Test
     public void getBooking() {
         given()
@@ -57,39 +92,34 @@ public class RestAssuredRequests extends BaseTestApi {
                 .then()
                 .spec(responseSpec)
                 .assertThat()
-                .body("firstname", equalTo("Jim")
-                        , "lastname", equalTo("Brown")
-                        , "totalprice", equalTo(111)
-                        , "depositpaid", equalTo(true)).extract().response();
+                .body(matchesJsonSchemaInClasspath("bookingSchema.json"))
+                .body("firstname", equalTo(firstname)
+                        , "lastname", equalTo(lastname)
+                        , "totalprice", equalTo(totalPrice)
+                        , "depositpaid", equalTo(true));
     }
 
-  /*  @Test
-    public void checkAuthorContract() {
-        given()
-                .header("Cookie", "token=" + dataProvider.getToken())
-                .body(builder.updateAuthor())
-                .when()
-                .patch(PATH_TO_BOOKING + dataProvider.getId())
-                .then()
-                .log()
-                .body()
-                .body(matchesJsonSchemaInClasspath("authorSchema.json"));
-    }*/
-
+    @Description("User should be able to partial update firstname and lastname")
     @Test
     public void partialUpdateBooking() {
+        PartialUpdateBookingPojo updateBooking = PartialUpdateBookingPojo.builder()
+                .firstname(updatedFirstname)
+                .lastname(updatedLastname)
+                .build();
+
         given()
                 .header("Cookie", "token=" + dataProvider.getToken())
-                .body(builder.updateAuthor())
+                .body(updateBooking)
                 .when()
                 .patch(PATH_TO_BOOKING + dataProvider.getId())
                 .then()
                 .spec(responseSpec)
-                .body(matchesJsonSchemaInClasspath("authorSchema.json"))
+                .body(matchesJsonSchemaInClasspath("bookingSchema.json"))
                 .assertThat()
-                .body("firstname", equalTo("James"), "lastname", equalTo("Bond"));
+                .body("firstname", equalTo(updatedFirstname), "lastname", equalTo(updatedLastname));
     }
 
+    @Description("User should be able to partial delete booking")
     @AfterTest
     public void deleteBooking() {
         given()

@@ -1,5 +1,6 @@
 package ui.pages.checkout.pages;
 
+import io.qameta.allure.Step;
 import ui.base.page.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +32,7 @@ public class CheckoutStepTwoPage extends BasePage {
     @FindBy(id = "back-to-products")
     private WebElement backToProductsButton;
 
+    @Step("Click finish button")
     public CheckoutStepTwoPage clickFinishButton() {
         assertion.assertEquals(driver.findElement(itemName).getText(), expectedItemName);
         assertion.assertEquals(driver.findElement(itemPrice).getText(), expectedItemPrice);
@@ -41,11 +43,13 @@ public class CheckoutStepTwoPage extends BasePage {
         return new CheckoutStepTwoPage(driver);
     }
 
+    @Step("Check order result, should be COMPLETE")
     public CheckoutStepTwoPage checkOrderResult() {
         waitForTextHasContent(checkoutMassage, expectedMassage);
         return new CheckoutStepTwoPage(driver);
     }
 
+    @Step("Click back to products button")
     public void clickBackToProductsButton() {
         waitForElementToBeClickable(backToProductsButton);
         backToProductsButton.click();

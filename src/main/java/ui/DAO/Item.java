@@ -3,16 +3,11 @@ package ui.DAO;
 import lombok.Builder;
 
 @Builder
-public class Item implements ItemDAO {
+public class Item {
     private String name;
     private String price;
     private String quantity;
 
-    /*public Item(String name, String price, String quantity) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-    }*/
 
     public void setName(String name) {
         this.name = name;
@@ -26,17 +21,14 @@ public class Item implements ItemDAO {
         this.quantity = quantity;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public String getPrice() {
         return price;
     }
 
-    @Override
     public String getQuantity() {
         return quantity;
     }
