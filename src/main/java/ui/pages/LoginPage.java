@@ -1,23 +1,20 @@
 package ui.pages;
 
-import ui.base.page.BasePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.testng.asserts.Assertion;
+import ui.base.page.BasePage;
 
 public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    private Assertion assertion = new Assertion();
     private Actions actions = new Actions(driver);
 
-    private String currentUrl;
     private String mainPagePath = "inventory";
     private String incorrectLoginMassage = "Epic sadface: Username and password do not match any user in this service";
     private String lockedLoginMassage = "Epic sadface: Sorry, this user has been locked out.";
@@ -53,8 +50,7 @@ public class LoginPage extends BasePage {
         password.sendKeys(pass);
         waitForElementToBeClickable(loginButton);
         loginButton.click();
-        currentUrl = driver.getCurrentUrl();
-        currentUrl.contains(mainPagePath);
+        validateUrl(mainPagePath);
         return new LoginPage(driver);
     }
 
@@ -70,12 +66,12 @@ public class LoginPage extends BasePage {
     @Step("Check error massage for incorrect log in")
     public void assertionForIncorrectLogin() {
         waitForElementToAppear(errorLoginMassage);
-        assertion.assertEquals(driver.findElement(errorLoginMassage).getText(), incorrectLoginMassage);
+        validateText(errorLoginMassage, incorrectLoginMassage);
     }
 
     @Step("Check error massage for locked log in")
     public void assertionForLockedLogin() {
         waitForElementToAppear(errorLoginMassage);
-        assertion.assertEquals(driver.findElement(errorLoginMassage).getText(), lockedLoginMassage);
+        validateText(errorLoginMassage, lockedLoginMassage);
     }
 }

@@ -1,19 +1,17 @@
 package ui.pages.checkout.pages;
 
 import io.qameta.allure.Step;
-import ui.base.page.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.asserts.Assertion;
+import ui.base.page.BasePage;
 
 public class CheckoutStepOnePage extends BasePage {
     public CheckoutStepOnePage(WebDriver driver) {
         super(driver);
     }
 
-    private String currentUrl;
     private String checkoutStepTwoPath = "checkout-step-two";
 
     @FindBy(id = "first-name")
@@ -38,8 +36,7 @@ public class CheckoutStepOnePage extends BasePage {
         zipPostalCode.sendKeys(postalCode);
         waitForElementToBeClickable(continueButton);
         continueButton.click();
-        currentUrl = driver.getCurrentUrl();
-        currentUrl.contains(checkoutStepTwoPath);
+        validateUrl(checkoutStepTwoPath);
         return new CheckoutStepOnePage(driver);
     }
 

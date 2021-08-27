@@ -1,19 +1,17 @@
 package ui.pages;
 
-import ui.base.page.BasePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.asserts.Assertion;
+import ui.base.page.BasePage;
 
 public class MainPage extends BasePage {
     public MainPage(WebDriver driver) {
         super(driver);
     }
 
-    private String currentUrl;
     private String productPagePath = "inventory-item";
     private String cartPath = "cart";
 
@@ -36,8 +34,7 @@ public class MainPage extends BasePage {
     public MainPage chooseItemSauceLabsBackpack() {
         waitForElementToBeClickable(sauceLabsBackPack);
         sauceLabsBackPack.click();
-        currentUrl = driver.getCurrentUrl();
-        currentUrl.contains(productPagePath);
+        validateUrl(productPagePath);
         return new MainPage(driver);
     }
 
@@ -74,8 +71,7 @@ public class MainPage extends BasePage {
 
     @Step("Click cart button")
     public CartPage clickCartButton() {
-        currentUrl = driver.getCurrentUrl();
-        currentUrl.contains(cartPath);
+        validateUrl(cartPath);
         waitForElementToBeClickable(cartButton);
         cartButton.click();
         return new CartPage(driver);
