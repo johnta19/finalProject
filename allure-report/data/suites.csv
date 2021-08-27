@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Sun Aug 22 22:21:23 EEST 2021","Sun Aug 22 22:21:25 EEST 2021","1527","Default Suite","finalProject","ui.tests.OrderTest","ui.tests.OrderTest","endToEndBuy","endToEndBuy","Order should be created when user finished checkout flow"
-"broken","Sun Aug 22 22:21:02 EEST 2021","Sun Aug 22 22:21:22 EEST 2021","20301","Default Suite","finalProject","ui.tests.OrderTest","ui.tests.OrderTest","createOrderWithEmptyCart","createOrderWithEmptyCart","User should not be able to create order when cart is empty"
