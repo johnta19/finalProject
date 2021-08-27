@@ -14,7 +14,4 @@ public class RequestSpec {
             .log(LogDetail.BODY)
             .build();
 
-
-
-
 }
