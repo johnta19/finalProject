@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cart Suite" parallel="false">
+    <test name="Cart test" parallel="false">
+        <classes>
+            <class name="ui.tests.CartTest"> </class>
+        </classes>
+    </test>
+</suite>

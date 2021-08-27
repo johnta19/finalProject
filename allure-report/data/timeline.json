@@ -1,0 +1,39 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "DESKTOP-VMPD4I0",
+    "children" : [ {
+      "name" : "11628@DESKTOP-VMPD4I0.main(1)",
+      "children" : [ {
+        "name" : "createOrderWithEmptyCart",
+        "uid" : "5c5034bd2a592941",
+        "parentUid" : "eefadefe4acb231cea955678c35139c0",
+        "status" : "broken",
+        "time" : {
+          "start" : 1629660062251,
+          "stop" : 1629660082552,
+          "duration" : 20301
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "endToEndBuy",
+        "uid" : "e56df77149740058",
+        "parentUid" : "eefadefe4acb231cea955678c35139c0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1629660083581,
+          "stop" : 1629660085108,
+          "duration" : 1527
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "eefadefe4acb231cea955678c35139c0"
+    } ],
+    "uid" : "dd45d98f68dd035b73676c23d7e42781"
+  } ]
+}
