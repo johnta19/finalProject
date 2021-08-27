@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.Assertion;
 
 public class BasePage {
     private static final int TIMEOUT = 15;
@@ -14,6 +15,7 @@ public class BasePage {
 
     protected WebDriver driver;
     private WebDriverWait wait;
+    private Assertion assertion = new Assertion();
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -52,5 +54,13 @@ public class BasePage {
 
     protected void waitForTextHasNotContent(By locator, String text) {
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(locator, text)));
+    }
+
+    protected boolean validateUrl(String url) {
+        return driver.getCurrentUrl().contains(url);
+    }
+
+    protected void validateText(By locator, String text) {
+        assertion.assertEquals(driver.findElement(locator).getText(), text);
     }
 }

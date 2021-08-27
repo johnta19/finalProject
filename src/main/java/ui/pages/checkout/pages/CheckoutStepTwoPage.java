@@ -1,12 +1,11 @@
 package ui.pages.checkout.pages;
 
 import io.qameta.allure.Step;
-import ui.base.page.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.asserts.Assertion;
+import ui.base.page.BasePage;
 
 public class CheckoutStepTwoPage extends BasePage {
 
@@ -14,9 +13,6 @@ public class CheckoutStepTwoPage extends BasePage {
         super(driver);
     }
 
-    private Assertion assertion = new Assertion();
-
-    private String currentUrl;
     private String checkoutCompletePath = "checkout-complete";
     private String expectedItemName = "Sauce Labs Backpack";
     private String expectedItemPrice = "$29.99";
@@ -34,12 +30,11 @@ public class CheckoutStepTwoPage extends BasePage {
 
     @Step("Click finish button")
     public CheckoutStepTwoPage clickFinishButton() {
-        assertion.assertEquals(driver.findElement(itemName).getText(), expectedItemName);
-        assertion.assertEquals(driver.findElement(itemPrice).getText(), expectedItemPrice);
+        validateText(itemName, expectedItemName);
+        validateText(itemPrice, expectedItemPrice);
         waitForElementToBeClickable(finishButton);
         finishButton.click();
-        currentUrl = driver.getCurrentUrl();
-        currentUrl.contains(checkoutCompletePath);
+        validateUrl(checkoutCompletePath);
         return new CheckoutStepTwoPage(driver);
     }
 

@@ -1,12 +1,11 @@
 package ui.pages;
 
 import io.qameta.allure.Step;
-import ui.base.page.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.asserts.Assertion;
+import ui.base.page.BasePage;
 import ui.pages.checkout.pages.CheckoutStepOnePage;
 
 public class CartPage extends BasePage {
@@ -14,7 +13,6 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    private String currentUrl;
     private String checkoutStepOnePath = "checkout-step-one";
     private String mainPagePath = "inventory";
 
@@ -55,8 +53,7 @@ public class CartPage extends BasePage {
 
     @Step("Click checkout button")
     public CheckoutStepOnePage clickCheckoutButton() {
-        currentUrl = driver.getCurrentUrl();
-        currentUrl.contains(checkoutStepOnePath);
+        validateUrl(checkoutStepOnePath);
         waitForElementToBeClickable(checkoutButton);
         checkoutButton.click();
         return new CheckoutStepOnePage(driver);
@@ -66,8 +63,7 @@ public class CartPage extends BasePage {
     public void clickContinueShoppingButton() {
         waitForElementToBeClickable(continueShoppingButton);
         continueShoppingButton.click();
-        currentUrl = driver.getCurrentUrl();
-        currentUrl.contains(mainPagePath);
+        validateUrl(mainPagePath);
     }
 
     @Step("Check checkout button is not clickable")
