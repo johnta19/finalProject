@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static steps.BayerSteps.*;
+import static steps.BuyerSteps.*;
 import static ui.tests.LoginTest.correctUser;
 import static ui.tests.LoginTest.password;
 

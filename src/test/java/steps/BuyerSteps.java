@@ -6,7 +6,7 @@ import ui.pages.MainPage;
 
 import static base.test.BaseTest.getDriver;
 
-public class BayerSteps {
+public class BuyerSteps {
     private static LoginPage loginPage;
     private static MainPage mainPage;
 

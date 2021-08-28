@@ -8,8 +8,6 @@ import api.pojo.PartialUpdateBookingPojo;
 import base.test.BaseTestApi;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
-import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -25,7 +23,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
-public class RestAssuredRequests extends BaseTestApi {
+public class CrudRequestTest extends BaseTestApi {
 
     private DataProvider dataProvider = new DataProvider();
     private Faker faker = new Faker();

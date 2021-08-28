@@ -3,7 +3,7 @@
 <suite name="CRUD Booking suite">
     <test name="CRUD Booking test">
         <classes>
-            <class name="api.tests.RestAssuredRequests"/>
+            <class name="api.tests.CrudRequestTest"/>
         </classes>
     </test>
 </suite>
