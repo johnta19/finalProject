@@ -26,7 +26,7 @@ public class CheckoutStepTwoPage extends BasePage {
     private WebElement finishButton;
 
     @FindBy(id = "back-to-products")
-    private WebElement backToProductsButton;
+    private WebElement backHomeButton;
 
     @Step("Click finish button")
     public CheckoutStepTwoPage clickFinishButton() {
@@ -45,9 +45,9 @@ public class CheckoutStepTwoPage extends BasePage {
     }
 
     @Step("Click back to products button")
-    public void clickBackToProductsButton() {
-        waitForElementToBeClickable(backToProductsButton);
-        backToProductsButton.click();
+    public void clickBackHomeButton() {
+        waitForElementToBeClickable(backHomeButton);
+        backHomeButton.click();
     }
 
 }

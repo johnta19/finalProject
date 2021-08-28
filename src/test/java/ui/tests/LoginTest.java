@@ -6,7 +6,7 @@ import listeners.ListenersTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static steps.BayerSteps.*;
+import static steps.BuyerSteps.*;
 
 @Listeners(ListenersTest.class)
 public class LoginTest extends BaseTest {

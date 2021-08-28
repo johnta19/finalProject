@@ -7,7 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
-import steps.BayerSteps;
+import steps.BuyerSteps;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +23,7 @@ public class BaseTest  {
         browserProvider = new BrowserProvider();
         browserProvider.getBrowser();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-        BayerSteps.init();
+        BuyerSteps.init();
     }
 
     @BeforeTest
