@@ -26,4 +26,5 @@ public class BrowserProvider extends BaseTest{
             driver = new FirefoxDriver();
         }
     }
+
 }
