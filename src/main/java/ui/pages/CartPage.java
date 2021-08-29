@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ui.base.page.BasePage;
-import ui.pages.checkout.pages.CheckoutStepOnePage;
+import ui.pages.checkout.pages.BuyerInformationPage;
 
 public class CartPage extends BasePage {
     public CartPage(WebDriver driver) {
@@ -52,11 +52,11 @@ public class CartPage extends BasePage {
     }
 
     @Step("Click checkout button")
-    public CheckoutStepOnePage clickCheckoutButton() {
+    public BuyerInformationPage clickCheckoutButton() {
         validateUrl(checkoutStepOnePath);
         waitForElementToBeClickable(checkoutButton);
         checkoutButton.click();
-        return new CheckoutStepOnePage(driver);
+        return new BuyerInformationPage(driver);
     }
 
     @Step("Click continue shopping button")

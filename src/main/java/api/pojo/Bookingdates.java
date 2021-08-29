@@ -1,11 +1,7 @@
 package api.pojo;
 
-
 import com.fasterxml.jackson.annotation.*;
 import lombok.Builder;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -20,9 +16,6 @@ public class Bookingdates {
     private String checkin;
     @JsonProperty("checkout")
     private String checkout;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
 
     @JsonProperty("checkin")
     public String getCheckin() {
@@ -42,16 +35,6 @@ public class Bookingdates {
     @JsonProperty("checkout")
     public void setCheckout(String checkout) {
         this.checkout = checkout;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

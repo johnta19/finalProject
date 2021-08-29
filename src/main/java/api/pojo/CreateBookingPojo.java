@@ -1,11 +1,7 @@
 package api.pojo;
 
-
 import com.fasterxml.jackson.annotation.*;
 import lombok.Builder;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -32,9 +28,6 @@ public class CreateBookingPojo {
     private Bookingdates bookingdates;
     @JsonProperty("additionalneeds")
     private String additionalneeds;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
 
     @JsonProperty("firstname")
     public String getFirstname() {
@@ -94,16 +87,6 @@ public class CreateBookingPojo {
     @JsonProperty("additionalneeds")
     public void setAdditionalneeds(String additionalneeds) {
         this.additionalneeds = additionalneeds;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }
