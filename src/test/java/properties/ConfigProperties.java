@@ -20,17 +20,6 @@ public class ConfigProperties {
             prop.load(input);
             BrowserProvider.browserName = prop.getProperty("browser");
 
-            LoginTest.correctUser = prop.getProperty("correctUser");
-            LoginTest.lockedUser = prop.getProperty("lockedUser");
-            LoginTest.incorrectUser = prop.getProperty("incorrectUser");
-            LoginTest.password = prop.getProperty("password");
-
-            OrderTest.firstname = prop.getProperty("firstname");
-            OrderTest.lastname = prop.getProperty("lastname");
-            OrderTest.postalCode = prop.getProperty("postalCode");
-
-            CrudRequestTest.loginApi = prop.getProperty("loginApi");
-            CrudRequestTest.passwordApi = prop.getProperty("passwordApi");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println(e.getCause());

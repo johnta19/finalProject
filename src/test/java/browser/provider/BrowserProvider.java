@@ -11,8 +11,8 @@ import static properties.ConfigProperties.getBrowserProperties;
 public class BrowserProvider extends BaseTest{
 
     public static String browserName;
-    public void getBrowser() {
 
+    public void getBrowser() {
         getBrowserProperties();
         if(browserName.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
