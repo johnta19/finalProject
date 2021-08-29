@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ui.base.page.BasePage;
 
-public class CheckoutStepOnePage extends BasePage {
-    public CheckoutStepOnePage(WebDriver driver) {
+public class BuyerInformationPage extends BasePage {
+    public BuyerInformationPage(WebDriver driver) {
         super(driver);
     }
 
@@ -27,7 +27,7 @@ public class CheckoutStepOnePage extends BasePage {
     private WebElement continueButton;
 
     @Step("Fill checkout form with firstname {0}, lastname {1}, postal code {2}")
-    public CheckoutStepOnePage fillCheckoutForm(String firstname, String lastname, String postalCode) {
+    public BuyerInformationPage fillCheckoutForm(String firstname, String lastname, String postalCode) {
         waitForElementToBeClickable(firstName);
         firstName.sendKeys(firstname);
         waitForElementToBeClickable(lastName);
@@ -37,7 +37,7 @@ public class CheckoutStepOnePage extends BasePage {
         waitForElementToBeClickable(continueButton);
         continueButton.click();
         validateUrl(checkoutStepTwoPath);
-        return new CheckoutStepOnePage(driver);
+        return new BuyerInformationPage(driver);
     }
 
     private By namePriceQuantityXpath(String name, String price, String quantity) {
@@ -45,9 +45,9 @@ public class CheckoutStepOnePage extends BasePage {
     }
 
     @Step("Check item {0}, price {1}, quantity {2} at order page")
-    public CheckoutStepTwoPage checkItemAtOrder(String name, String price, String quantity){
+    public OrderInformationPage checkItemAtOrder(String name, String price, String quantity){
         waitForElementToPresence(namePriceQuantityXpath(name, price, quantity));
-        return new CheckoutStepTwoPage(driver);
+        return new OrderInformationPage(driver);
     }
 
 }
