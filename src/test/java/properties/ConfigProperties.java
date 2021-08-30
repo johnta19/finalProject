@@ -1,6 +1,6 @@
 package properties;
 
-import base.test.BaseTest;
+import api.tests.CrudRequestTest;
 import browser.provider.BrowserProvider;
 import ui.tests.LoginTest;
 import ui.tests.OrderTest;
@@ -10,33 +10,19 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigProperties {
-    static Properties prop = new Properties();
-    static String projectPath = System.getProperty("user.dir");
+    private static Properties prop = new Properties();
+    private static String projectPath = System.getProperty("user.dir");
+    private static InputStream input;
 
-    public static void getProperties() {
+    public static String getConfigProperty(String key) {
         try {
-            InputStream input = new FileInputStream(projectPath + "/src/main/resources/config.properties");
+            input = new FileInputStream(projectPath + "/src/main/resources/config.properties");
             prop.load(input);
-            String browser = prop.getProperty("browser");
-            String correctUser = prop.getProperty("correctUser");
-            String lockedUser = prop.getProperty("lockedUser");
-            String incorrectUser = prop.getProperty("incorrectUser");
-            String password = prop.getProperty("password");
-            String firstname = prop.getProperty("firstname");
-            String lastname = prop.getProperty("lastname");
-            String postalCode = prop.getProperty("postalCode");
-            BrowserProvider.browserName = browser;
-            LoginTest.correctUser = correctUser;
-            LoginTest.lockedUser = lockedUser;
-            LoginTest.incorrectUser = incorrectUser;
-            LoginTest.password = password;
-            OrderTest.firstname = firstname;
-            OrderTest.lastname = lastname;
-            OrderTest.postalCode = postalCode;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println(e.getCause());
             e.printStackTrace();
         }
+        return prop.getProperty(key);
     }
 }

@@ -3,11 +3,9 @@ package ui.tests;
 import base.test.BaseTest;
 import io.qameta.allure.Description;
 import listeners.ListenersTest;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
+import static properties.ConfigProperties.getConfigProperty;
 import static steps.BuyerSteps.*;
 import static ui.tests.CartTest.sauceLabsBackpack;
 import static ui.tests.LoginTest.correctUser;
@@ -19,6 +17,12 @@ public class OrderTest extends BaseTest {
     public static String lastname;
     public static String postalCode;
 
+    @BeforeTest()
+    public void getBuyerInformation() {
+        firstname = getConfigProperty("firstname");
+        lastname = getConfigProperty("lastname");
+        postalCode = getConfigProperty("postalCode");
+    }
     @BeforeMethod
     public void logIn() {
         correctLogIn(correctUser, password);

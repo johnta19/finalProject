@@ -5,14 +5,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 
-import static properties.ConfigProperties.getProperties;
+import static properties.ConfigProperties.getConfigProperty;
+
 
 public class BrowserProvider extends BaseTest{
 
     public static String browserName;
-    public void getBrowser() {
 
-        getProperties();
+    public void getBrowser() {
+        browserName = getConfigProperty("browser");
         if(browserName.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
             driver = new ChromeDriver();

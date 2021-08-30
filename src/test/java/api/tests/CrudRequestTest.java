@@ -1,6 +1,6 @@
 package api.tests;
 
-import api.data.provider.DataProvider;
+import api.data.provider.BookingData;
 import api.pojo.Bookingdates;
 import api.pojo.CreateBookingPojo;
 import api.pojo.CreateTokenPojo;
@@ -10,11 +10,10 @@ import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static api.constants.Credentials.LOGIN;
-import static api.constants.Credentials.PASSWORD;
 import static api.constants.Endpoints.PATH_TO_BOOKING;
 import static api.constants.Endpoints.POST_REQUEST;
 import static api.specifications.ResponseSpec.responseSpec;
@@ -22,26 +21,42 @@ import static api.specifications.ResponseSpec.responseSpecDeleteBooking;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
+import static properties.ConfigProperties.getConfigProperty;
 
 public class CrudRequestTest extends BaseTestApi {
 
-    private DataProvider dataProvider = new DataProvider();
-    private Faker faker = new Faker();
-    private String firstname = faker.name().firstName();
-    private String updatedFirstname = faker.name().firstName();
-    private String updatedLastname = faker.name().lastName();
-    private String lastname = faker.name().lastName();
-    private String additionalNeeds = faker.commerce().productName();
-    private int totalPrice = faker.number().randomDigit();
-    private String chekIn = "2018-01-01";
-    private String chekOut = "2019-01-01";
+    private BookingData bookingData;
+    private Faker faker;
+    public static String loginApi;
+    public static String passwordApi;
+    private String firstname;
+    private String updatedFirstname;
+    private String updatedLastname;
+    private String lastname;
+    private String additionalNeeds;
+    private int totalPrice;
+    private String chekIn;
+    private String chekOut;
 
     @Description("User should be able to log in")
     @BeforeTest
     public void createToken() {
+        bookingData = new BookingData();
+        faker = new Faker();
+        loginApi = getConfigProperty("loginApi");
+        passwordApi = getConfigProperty("passwordApi");
+        firstname = faker.name().firstName();
+        updatedFirstname = faker.name().firstName();
+        updatedLastname = faker.name().lastName();
+        lastname = faker.name().lastName();
+        additionalNeeds = faker.commerce().productName();
+        totalPrice = faker.number().randomDigit();
+        chekIn = "2018-01-01";
+        chekOut = "2019-01-01";
+
         CreateTokenPojo createToken =  CreateTokenPojo.builder()
-                .username(LOGIN)
-                .password(PASSWORD)
+                .username(loginApi)
+                .password(passwordApi)
                 .build();
 
         Response response = given()
@@ -51,11 +66,11 @@ public class CrudRequestTest extends BaseTestApi {
                 .then()
                 .spec(responseSpec)
                 .extract().response();
-        dataProvider.setToken(response.jsonPath().getString("token"));
+        bookingData.setToken(response.jsonPath().getString("token"));
     }
 
     @Description("User should be able to create booking")
-    @Test
+    @BeforeClass
     public void createBooking() {
         Bookingdates bookingdates = Bookingdates.builder()
                 .checkin(chekIn)
@@ -78,7 +93,7 @@ public class CrudRequestTest extends BaseTestApi {
                 .then()
                 .spec(responseSpec)
                 .extract().response();
-        dataProvider.setId(response.jsonPath().getInt("bookingid"));
+        bookingData.setId(response.jsonPath().getInt("bookingid"));
     }
 
     @Description("User should be able to get booking")
@@ -86,7 +101,7 @@ public class CrudRequestTest extends BaseTestApi {
     public void getBooking() {
         given()
                 .when()
-                .get(PATH_TO_BOOKING + dataProvider.getId())
+                .get(PATH_TO_BOOKING + bookingData.getId())
                 .then()
                 .spec(responseSpec)
                 .assertThat()
@@ -106,10 +121,10 @@ public class CrudRequestTest extends BaseTestApi {
                 .build();
 
         given()
-                .header("Cookie", "token=" + dataProvider.getToken())
+                .header("Cookie", "token=" + bookingData.getToken())
                 .body(updateBooking)
                 .when()
-                .patch(PATH_TO_BOOKING + dataProvider.getId())
+                .patch(PATH_TO_BOOKING + bookingData.getId())
                 .then()
                 .spec(responseSpec)
                 .body(matchesJsonSchemaInClasspath("bookingSchema.json"))
@@ -121,9 +136,9 @@ public class CrudRequestTest extends BaseTestApi {
     @AfterTest
     public void deleteBooking() {
         given()
-                .header("Cookie", "token=" + dataProvider.getToken())
+                .header("Cookie", "token=" + bookingData.getToken())
                 .when()
-                .delete(PATH_TO_BOOKING + dataProvider.getId())
+                .delete(PATH_TO_BOOKING + bookingData.getId())
                 .then()
                 .spec(responseSpecDeleteBooking);
     }
