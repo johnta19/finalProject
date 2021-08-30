@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('clean') {
             steps {
-                'rm -rf allure-results'
-                'rm -rf allure-report'
+                bat 'rm -rf allure-results'
+                bat 'rm -rf allure-report'
             }
         }
         stage('test') {
