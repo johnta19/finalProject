@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('clean') {
-            steps {
-                bat 'rm -rf allure-results'
-                bat 'rm -rf allure-report'
-            }
-        }
         stage('test') {
             steps{
                 node('master') {
