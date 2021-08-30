@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static properties.ConfigProperties.getUiCredentialsProperties;
+import static properties.ConfigProperties.getConfigProperty;
 import static steps.BuyerSteps.*;
 
 @Listeners(ListenersTest.class)
@@ -19,7 +19,10 @@ public class LoginTest extends BaseTest {
 
     @BeforeTest
     public void getCredentials() {
-        getUiCredentialsProperties();
+        correctUser = getConfigProperty("correctUser");
+        lockedUser = getConfigProperty("lockedUser");
+        incorrectUser = getConfigProperty("incorrectUser");
+        password = getConfigProperty("password");
     }
 
     @Description("Standard user should be able to login")

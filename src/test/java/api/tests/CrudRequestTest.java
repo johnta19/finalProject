@@ -21,7 +21,7 @@ import static api.specifications.ResponseSpec.responseSpecDeleteBooking;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
-import static properties.ConfigProperties.getApiCredentialsProperties;
+import static properties.ConfigProperties.getConfigProperty;
 
 public class CrudRequestTest extends BaseTestApi {
 
@@ -41,9 +41,10 @@ public class CrudRequestTest extends BaseTestApi {
     @Description("User should be able to log in")
     @BeforeTest
     public void createToken() {
-        getApiCredentialsProperties();
         bookingData = new BookingData();
         faker = new Faker();
+        loginApi = getConfigProperty("loginApi");
+        passwordApi = getConfigProperty("passwordApi");
         firstname = faker.name().firstName();
         updatedFirstname = faker.name().firstName();
         updatedLastname = faker.name().lastName();
